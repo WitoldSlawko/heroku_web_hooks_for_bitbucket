@@ -1,0 +1,23 @@
+# This is a sample build configuration for JavaScript.
+# Check our guides at https://confluence.atlassian.com/x/14UWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: node:6.9.4
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - node
+        script: # Modify the commands below to build your repository.
+          - npm install -d
+          - npm run build
+          - npm run test
+          # $1 : $HEROKU_API_KEY
+          # $2 : $HEROKU_APP_FULL_NAME
+          # $3 : $HEROKU_APP_SHORT_NAME
+          # $4 : $GIT_DEPLOY_USER
+          # $5 : $GIT_DEPLOY_EMAIL
+          # $6 : $BITBUCKET_BRANCH
+          - ./heroku-deployment-review-apps.sh $HEROKU_API_KEY $HEROKU_APP_FULL_NAME $HEROKU_APP_SHORT_NAME $GIT_DEPLOY_USER $GIT_DEPLOY_EMAIL $BITBUCKET_BRANCH
