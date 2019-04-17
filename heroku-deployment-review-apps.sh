@@ -54,9 +54,9 @@ function remove_branch {
 
 function uncache_package_json {
     if [[ $(ls | grep package-lock.json) == "package-lock.json" ]]
-        then
-            git rm --cached package-lock.json
-        fi
+    then
+        git rm --cached package-lock.json
+    fi
 }
 
 if [[ $6 == "master" ]]
